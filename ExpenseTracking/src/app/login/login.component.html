@@ -1,0 +1,21 @@
+<div class="container-fluid bg-dark">
+    <form [formGroup]="loginForm" (ngSubmit)=" loginCredentials()" style="text-align: center;" class="form-control bg-dark text-light">
+       Username: <input type="text" name="username" placeholder="Enter Username" class="form-control" formControlName="username" minlength="4" required autocomplete="off"    [ngClass]="{'is-invalid':formControls.username.touched && formControls.username.invalid}"><br><br>
+       <div *ngIf="isSubmitted && formControls.username.errors">
+           <div *ngIf="formControls.username.errors" style="color: red; text-align: center;">
+           Username is required!
+           </div>
+       </div>
+       Password: <input type="password"  name="userpassword" placeholder="Enter Password" class="form-control" formControlName="userpassword" minlength="4" required [ngClass]="{'is-invalid':formControls.userpassword.touched && formControls.userpassword.invalid}"><br><br>
+       <div *ngIf="isSubmitted && formControls.userpassword.errors">
+        <div *ngIf="formControls.userpassword.errors" style="color: red; text-align: center;">
+        Password is required<br>
+        </div>
+    </div>
+       <button class="btn btn-warning" >Login</button>
+      <div *ngIf="error" style="color: red;">
+           {{error}}
+       </div>
+    </form>
+    </div>
+
