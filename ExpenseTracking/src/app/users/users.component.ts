@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PaginatePipe } from 'ngx-pagination';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../shared/auth.service';
 import { UserService } from '../shared/user.service';
@@ -10,12 +11,11 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  page:number=1;
+  pages:number=1;
   filter:string;
   user:string;
   myExpenses:any;
   constructor(public userservice:UserService,private authservice:AuthService,private router:Router,private toaster:ToastrService) { }
-
   ngOnInit(): void {
     this.user=sessionStorage.getItem("Username");
     this.userservice.getExpenseByName().subscribe(
@@ -29,7 +29,6 @@ export class UsersComponent implements OnInit {
         console.log(error);
       }
     );
- 
   }
   logout()
   {

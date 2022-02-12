@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {Item} from '../../shared/item';
 import {Itemlist} from '../../shared/itemlist';
 import {Expense} from '../../shared/expense'
-
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/shared/user.service';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addexpense',
@@ -22,51 +22,45 @@ export class AddexpenseComponent implements OnInit {
   ItemL:any={};
   DefaultCat:number;
   isVisible:boolean=false;
-  Catvisible:boolean=true;
+  catVisible:boolean=true;
   buttonDisabled: boolean;
   total:number;
   expdate:Date;
-  constructor(public userservice:UserService,private toastr: ToastrService) { }
+  constructor(public userservice:UserService,private toastr: ToastrService,private router:Router) { }
   hideCategory() {
     this.isVisible = true;
-    this.Catvisible=false;
+    this.catVisible=false;
   }
-  
+  // Add new Items
   addFieldValue() {
     this.buttonDisabled=false;
     console.log("Button Enabled");
-   this.newAttribute.Item_id=this.userservice.itemlen+this.expArray.length;  // I didnt use Identity hence auto-generate next PostID
-    this.ItemL.Iteml_id=this.newAttribute.Item_id+1;
-    this.ItemL.Item_id=this.newAttribute.Item_id;
-    this.ItemL.exp_id=this.userservice.explen;
+   this.newAttribute.ItemId=this.userservice.itemlen+this.expArray.length;  // I didnt use Identity hence auto-generate next PostID
+    this.ItemL.ItemlId=this.newAttribute.ItemId+1;
+    this.ItemL.ItemId=this.newAttribute.ItemId;
+    this.ItemL.ExpId=this.userservice.explen;
     this.ItemListArray.push(this.ItemL)
-    this.newAttribute.Cat_id=Number(this.newAttribute.Cat_id);
+    this.newAttribute.CatId=Number(this.newAttribute.CatId);
    this.expArray.push(this.newAttribute)
     console.log(this.expArray);
     this.newAttribute = {};
     this.ItemL={};
-    console.log(this.newAttribute.CatId);
-
-
-    
+    console.log(this.newAttribute.CatId);   
 }
-
 onSubmit()
 {
-
   console.log('---Items--');
   for(let i=0;i<this.expArray.length;i++)
-  this.total+=this.expArray[i].Item_price;
- this.expo.Exp_id=this.userservice.explen;
+  this.total+=this.expArray[i].ItemPrice;
+ this.expo.ExpId=this.userservice.explen;
  var datepipe=new DatePipe("en-UK");
  let formattedDate:any=datepipe.transform(this.expdate,'yyyy-MM-dd');
- this.expo.Expense_date=formattedDate;
- this.expo.Total_exp=this.total;
- this.expo.User_id=+sessionStorage.getItem("UserId");
- this.expo.Iteml_id=this.userservice.itemlen+1;
+ this.expo.ExpenseDate=formattedDate;
+ this.expo.TotalExp=this.total;
+ this.expo.Userid=+sessionStorage.getItem("UserId");
+ this.expo.ItemlId=this.userservice.itemlen+1;
  this.Exp.push(this.expo);
- //console.log(this.Exp[0]);
-
+ //Adding Items ,Item Lists and Expense
   for(let i=0;i<this.expArray.length;i++)
  { 
   console.log("Adding Items");
@@ -92,7 +86,7 @@ onSubmit()
     console.log(error);
   }
   );
-  
+  //Adding Item lists Loop
  for(let k=0;k<this.expArray.length;k++)
  {
    console.log("Adding Item Lists");
@@ -107,12 +101,10 @@ onSubmit()
     }
     );
  }
-
-
  this.toastr.show("Sucessfully Added all Expenses","Expense Insertion");
- //this.resetForm(); 
+ this.router.navigateByUrl('/admin/view');
 }
-
+// Delete Field
 deleteFieldValue(index) {
     this.expArray.splice(index, 1);
 }
@@ -124,8 +116,5 @@ deleteFieldValue(index) {
     this.userservice.explen;
     this.userservice.itemlen;
     this.total=0;
-
   }
-
-
 }

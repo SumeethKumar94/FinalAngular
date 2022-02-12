@@ -8,9 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { AddexpenseComponent } from './Users/addexpense/addexpense.component';
 import { EditprofileComponent } from './Users/editprofile/editprofile.component';
 import { UsersComponent } from './users/users.component';
-
-
-
+// All Paths Defined
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'admin',component:AdminComponent},

@@ -10,10 +10,9 @@
        <th>Email</th>
        <th>Address</th>
        <th>Password</th>
-       <th>Action</th>
-       
+       <th>Action</th>  
       </thead>
-      <tbody *ngFor="let user of userservice.users|filter:filter|paginate:{itemsPerPage:4,currentPage:page}">
+      <tbody *ngFor="let user of userservice.users|filter:filter|paginate:{itemsPerPage:2,currentPage:page}">
       <tr> 
           <td>{{user.Name}}</td>
           <td>{{user.UserName}}</td>
@@ -24,9 +23,7 @@
           <td>
             <button class="btn btn-outline-warning" (click)="deleteUser(user.UserId)" style="color:darkorange; border:1px solid black;">Delete</button>
         </td>
-
         </tr>
       </tbody>
   </table>
-
  <footer> <pagination-controls (pageChange)="page= $event"></pagination-controls></footer>

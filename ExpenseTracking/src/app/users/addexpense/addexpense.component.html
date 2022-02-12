@@ -2,14 +2,12 @@
 <a href="/user" class="link" style="text-decoration: none; color:rgb(220, 100, 20);">Go Back</a>
 <div class="form-group" >
     <label class="text-dark " style="font-weight: bold;">Category</label>
-    <select id="dropdown" class="bg-success" name="cat_id" id="cat_id" class="form-control" #cat_id="ngModel" [(ngModel)]="newAttribute.Cat_id" required >
+    <select id="dropdown" class="bg-success" name="CatId" id="CatId" class="form-control" #CatId="ngModel" [(ngModel)]="newAttribute.CatId" required >
         <option [value]="null" disabled></option>
-        <option    *ngFor="let cat of userservice.category" value="{{cat.CatId}}" [selected]="i==cat.CatId">{{cat.CatName}}</option> 
-  
+        <option  *ngFor="let cat of userservice.category" value="{{cat.CatId}}" [selected]="i==cat.CatId">{{cat.CatName}}</option> 
     </select>
-
-    <!--validation --><div class="validation-errors" *ngIf="cat_id.invalid" style="color: red; text-align: left;">
-        <div *ngIf="cat_id.errors.required">
+    <!--validation --><div class="validation-errors" *ngIf="CatId.invalid" style="color: red; text-align: left;">
+        <div *ngIf="CatId.errors.required">
            Category is required!
         </div>
     </div>
@@ -29,16 +27,16 @@
     <tbody style="background-color: gold;">
         <tr *ngFor="let item of expArray; let i = index">
             <td>
-                <input [(ngModel)]="item.Item_id" class="form-control" type="text" name="{{item.Item_id}}" readonly/>
+                <input [(ngModel)]="item.ItemId" class="form-control" type="text" name="{{item.ItemId}}" readonly/>
             </td>
             <td>
-                <input [(ngModel)]="item.Item_name" class="form-control" type="text" name="{{item.Item_name}}" [ngClass]="{'is-invalid': item.Item_name.touched && item.Item_name.invalid}" readonly />
+                <input [(ngModel)]="item.ItemName" class="form-control" type="text" name="{{item.ItemName}}" [ngClass]="{'is-invalid': item.ItemName.touched && item.ItemName.invalid}" readonly />
             </td>
             <td>
-                <input [(ngModel)]="item.Item_price" class="form-control" type="text" name="{{item.Item_price}}" readonly/>
+                <input [(ngModel)]="item.ItemPrice" class="form-control" type="text" name="{{item.ItemPrice}}" readonly/>
             </td>
             <td>
-                <input [(ngModel)]="item.Item_bill" class="form-control" type="text" name="{{item.Item_bill}}" readonly/>
+                <input [(ngModel)]="item.ItemBill" class="form-control" type="text" name="{{item.ItemBill}}" readonly/>
             </td>
             <td>
                 <button class="btn btn-outline-danger"  type="button" (click)="deleteFieldValue(i)" >X</button>
@@ -46,31 +44,28 @@
         </tr>
         <tr>
             <td>
-                <input class="form-control" type="hidden" id="ItemId" [(ngModel)]="newAttribute.Item_id" name="Item_id"  readonly/>
+                <input class="form-control" type="hidden" id="ItemId" [(ngModel)]="newAttribute.ItemId" name="ItemId"  readonly/>
             </td>
             <td>
-                <input class="form-control" type="text" id="ItemName" [(ngModel)]="newAttribute.Item_name" name="Item_name"  placeholder="Enter a Item"  text="Add Title " required/>
+                <input class="form-control" type="text" id="ItemName" [(ngModel)]="newAttribute.ItemName" name="ItemName"  placeholder="Enter a Item"  text="Add Title " required/>
             </td>
             <td>
-                <input class="form-control" type="number" id="ItemPrice" [(ngModel)]="newAttribute.Item_price" name="Item_price" placeholder="Enter Price" required/>
+                <input class="form-control" type="number" id="ItemPrice" [(ngModel)]="newAttribute.ItemPrice" name="ItemPrice" placeholder="Enter Price" required/>
             </td>
             <td>
-                <input class="form-control" type="text" id="ItemBill" [(ngModel)]="newAttribute.Item_bill" name="Item_bill" placeholder="Enter Bill url" required/>
+                <input class="form-control" type="text" id="ItemBill" [(ngModel)]="newAttribute.ItemBill" name="ItemBill" placeholder="Enter Bill url" required/>
             </td>
 
             <td>
-                <button id="#addBtn" class="btn btn-outline-success" type="button" (click)="addFieldValue();" [disabled]="!(form.valid && form.dirty && cat_id.valid )">+</button>
+                <button id="#addBtn" class="btn btn-outline-success" type="button" (click)="addFieldValue();" [disabled]="!(form.valid && form.dirty && CatId.valid )">+</button>
             </td>
         </tr>
-        
-          
-   
     </tbody>
 </table>
 </div>
 <br><br>
 <label>Expense Date:</label>
-&nbsp;&nbsp;<input type="date" [ngModel] ="expdate | date:'yyyy-MM-dd'" (ngModelChange)="expdate = $event" name="expense_date"><br><br><br>
+&nbsp;&nbsp;<input type="date" [ngModel] ="expdate | date:'yyyy-MM-dd'" (ngModelChange)="expdate = $event" name="expense_date" required><br><br><br>
 <div style="display: flex; justify-content:center;">
 <button class="btn btn-lg btn-outline-warning" style="border:2px solid orangered;" type="submit"   >Add Expense</button>
 </div>

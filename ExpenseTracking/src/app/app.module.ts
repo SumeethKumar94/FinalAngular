@@ -22,8 +22,6 @@ import { EditprofileComponent } from './Users/editprofile/editprofile.component'
 import { AddexpenseComponent } from './Users/addexpense/addexpense.component';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,7 +1,7 @@
 export class Item {
-    Item_id:number;
-    Cat_id:number;
-    Item_name:string;
-    Item_price:number;
-    Item_bill:string;
+    ItemId:number;
+    CatId:number;
+    ItemName:string;
+    ItemPrice:number;
+    ItemBill:string;
 }

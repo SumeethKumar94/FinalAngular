@@ -3,14 +3,13 @@
      <span class="text-light">Welcome {{user}}</span>
      <a href="/user/addexpense" style="text-decoration: none; color: rgb(255, 145, 0);">Add Expense</a>
          <a href="/user/editprofile" style="text-decoration: none; color: rgb(255, 153, 0);">Edit Profile</a>
-        <a (click)="logout()" style="text-decoration: none; color: rgb(255, 60, 0);">Logout</a>
-     
+        <a (click)="logout()" style="text-decoration: none; color: rgb(255, 60, 0);">Logout</a> 
     </div>
     <div class="col-md-9">
         <h2 style="text-align:center;">My Expenses</h2>
-        <div class="col" *ngFor="let expense of myExpenses|paginate:{itemsPerPage:1,currentPage:page}" style="margin-bottom:15px;">
-
-            <div  *ngFor="let items of expense; index as i;" style="border:1px solid rgb(255, 82, 3); height:300px;">
+        <input type="text" placeholder="Enter Expense ID" class="form-control" [(ngModel)]="filter">
+        <div class="col" *ngFor="let expense of myExpenses |filter:filter|paginate:{itemsPerPage:3,currentPage:pages}" style="margin-bottom:15px;">   
+            <div  *ngFor="let items of expense  index as i" style="border:1px solid rgb(255, 82, 3); height:300px;">
                 <span style="display:flex;justify-content: space-between;">
                 <h6> Expense Date: {{expense[i].ExpenseDate|date:'dd-MMM-yyyy'}}</h6><br><br>
             </span>
@@ -26,15 +25,12 @@
                             <td>{{expense[i].Itemlist[k].ItemName}}</td>
                             <td>{{expense[i].Itemlist[k].Category}}</td>
                             <td>{{expense[i].Itemlist[k].ItemPrice}}</td>
-                        </tr>
-                        
-                    </tbody>
+                        </tr>                       
+                   </tbody>
                 </table>
-            
-               
                </div>
-          </div>
-            <footer><pagination-controls (pageChange)="page= $event"></pagination-controls></footer> 
+               <pagination-controls (pageChange)="pages=$event"></pagination-controls>  
+          </div>  
          </div>
         
 </div>

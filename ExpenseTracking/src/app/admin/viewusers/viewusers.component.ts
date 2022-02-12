@@ -10,7 +10,7 @@ import { UserService } from 'src/app/shared/user.service';
 })
 export class ViewusersComponent implements OnInit {
 filter:string;
-page:number;
+page:number=1;
   constructor(public userservice:UserService,private authservice:AuthService,private router:Router) { }
 btn()
 {
